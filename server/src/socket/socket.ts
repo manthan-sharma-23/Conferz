@@ -21,8 +21,11 @@ export default class SocketService {
   SocketListenner() {
     this._wss.on("connection", (socket) => {
       const socketId = this._counter++;
+
+      console.log(this._counter);
       socket.on("message", (msg) => {
         const message: MessageType = JSON.parse(msg.toString());
+        console.log(message);
 
         if (message.type === "JOIN" && message.payload.room) {
           this._joinRoom(socket, socketId, message.payload.room);
@@ -70,6 +73,18 @@ export default class SocketService {
   }
 
   private _joinRoom(socket: WebSocket, socketId: number, room: string) {
+    const broadCast: MessageType = {
+      type: "INFO",
+      payload: {
+        text: `New User Joined With Id ${socketId}`,
+      },
+    };
+    this._users.forEach((user) => {
+      if (user.room === room) {
+        user.socket.send(JSON.stringify(broadCast));
+      }
+    });
+
     this._users.set(socketId, { room, socket });
 
     this._users.forEach((user) => {
