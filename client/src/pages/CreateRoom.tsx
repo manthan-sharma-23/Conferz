@@ -1,4 +1,6 @@
 import { useCallback, useState } from "react";
+import { useSocket } from "../hooks/socket.hook";
+import { useNavigate } from "react-router-dom";
 
 interface EnterMeetDetails {
   name?: string;
@@ -12,10 +14,10 @@ const CreateRoom = () => {
     email: "",
     roomType: "p2p",
   });
+  const navigate = useNavigate();
+  const socket = useSocket();
 
-  const onRoomSubmit = useCallback(() => {
-    console.log(formDetails);
-  }, [formDetails]);
+  const onRoomSubmit = useCallback(() => {}, [formDetails]);
 
   return (
     <div className="h-screen w-full border-2 flex justify-center items-center">

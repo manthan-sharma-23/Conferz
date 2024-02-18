@@ -1,16 +1,12 @@
-import bodyParser from "body-parser";
 import express from "express";
 import http from "http";
 import SocketService from "./socket/socket";
-import cors from "cors";
+import AppRouter from "./api";
 
 const PORT = 3200;
 
 const app = express();
-app
-  .use(bodyParser.json())
-  .use(bodyParser.urlencoded({ extended: true }))
-  .use(cors());
+app.use("/api", AppRouter);
 
 const server = http.createServer(app);
 

@@ -1,1 +1,0 @@
-## WebRTC Implementation based on Typescript, WebSockets and WebRTC api.

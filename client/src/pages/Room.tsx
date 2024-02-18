@@ -1,21 +1,26 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useSocket } from "../hooks/socket.hook";
 import { useEffect } from "react";
-import { MessageType } from "../config";
+import { useRecoilValue } from "recoil";
+import { UserAtom } from "../store/atoms/user.atom";
 
 const Room = () => {
+  const navigate = useNavigate();
   const { room } = useParams();
   const socket = useSocket();
+  const user = useRecoilValue(UserAtom);
 
   useEffect(() => {
-    socket.addEventListener("message", (msg) => {
-      const message: MessageType = JSON.parse(msg.data);
+    if (socket.readyState === WebSocket.OPEN) {
+      socket.send(JSON.stringify({ text: "in room" }));
+    }
+    if (user.email === null) {
+      navigate("/join");
+      alert("Please provide credentials");
+    }
+  }, [socket, navigate, user]);
 
-      if (message.type === "MESSAGE") {
-        console.log(message);
-      }
-    });
-  }, [socket]);
+  console.log(user);
 
   return (
     <div className="h-screen w-screen text-3xl font-bold font-sans flex justify-center items-center">

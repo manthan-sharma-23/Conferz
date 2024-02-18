@@ -9,6 +9,6 @@ export interface MessageType {
 }
 
 export interface User {
-  name?: string;
-  email?: string;
+  name: string | null;
+  email: string | null;
 }
