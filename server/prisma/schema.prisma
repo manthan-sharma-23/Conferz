@@ -16,7 +16,8 @@ model User {
 }
 
 model Room {
-  id    String  @id @unique @default(cuid())
-  type  String? @default("p2p")
-  users User[]
+  id        String   @id @unique @default(cuid())
+  type      String?  @default("p2p")
+  users     User[]
+  createdAt DateTime @default(now())
 }

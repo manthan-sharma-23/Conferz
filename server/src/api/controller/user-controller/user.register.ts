@@ -15,7 +15,7 @@ export default async function RegisterUser(req: Request, res: Response) {
   try {
     const { name, email, password } = req.body as INPUT_LOGIN_FORM;
 
-    await INPUT_LOGIN_FORM.parse(req.body);
+    INPUT_LOGIN_FORM.parse(req.body);
 
     if (!email || !password)
       return res.status(INVALID_INPUTS.code).json(INVALID_INPUTS.action);
@@ -41,7 +41,6 @@ export default async function RegisterUser(req: Request, res: Response) {
         password: hashedPassword,
       },
     });
-
     const token = jwt.sign({ userId: user.id }, SECRET_KEY);
 
     const output: OUTPUT_LOGIN_FORM = {
