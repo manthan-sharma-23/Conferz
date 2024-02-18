@@ -29,6 +29,7 @@ export const createRoom = async (req: ProtectedRequest, res: Response) => {
       data: {
         name: roomName,
         type,
+        createdBy: id,
       },
     });
 
@@ -43,7 +44,8 @@ export const createRoom = async (req: ProtectedRequest, res: Response) => {
     });
     if (!roomUser.id) return res.sendStatus(RESOURCE_NOT_MODIFIED.code);
     return res.status(RESOURCE_CREATED_SUCCESSFULLY.code).json(room);
-  } catch (error) {RESOURCE_CREATED_SUCCESSFULLY.action
+  } catch (error) {
+    RESOURCE_CREATED_SUCCESSFULLY.action;
     return res
       .status(INTERNAL_SERVER_ERROR.code)
       .json(INTERNAL_SERVER_ERROR.action);

@@ -57,3 +57,15 @@ export interface USER_ROOM_TYPE {
   userType: "host" | "member";
   room: ROOM;
 }
+
+export interface RoomUser {
+  userType: "member" | "host";
+  user: USER;
+}
+
+export interface RoomDetails {
+  name: string | null;
+  createdAt: Date | null;
+  createdBy: string | null;
+  users: RoomUser[];
+}

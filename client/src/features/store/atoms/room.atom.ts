@@ -1,17 +1,19 @@
 import { atom } from "recoil";
-import { USER_ROOM_TYPE } from "../../../utils/types";
+import { RoomDetails } from "../../../utils/types/index";
 
-interface ATOM_USER_ROOM {
-  rooms: USER_ROOM_TYPE[];
+interface RoomAtomDetails extends RoomDetails {
   isLoading: boolean;
 }
 
-const InitialState: ATOM_USER_ROOM = {
+export const initialRoomState: RoomAtomDetails = {
+  name: null,
+  createdAt: null,
+  createdBy: null,
+  users:[],
   isLoading: false,
-  rooms: [],
 };
 
 export const RoomAtom = atom({
   key: "room/atom",
-  default: InitialState,
+  default: initialRoomState,
 });

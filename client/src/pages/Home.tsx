@@ -10,7 +10,7 @@ const Home = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="h-full w-full p-8 flex  justify-center items-center gap-4 bg-black">
+    <div className="h-full w-full p-8 flex  justify-center items-center gap-4 bg-black ">
       <div className="bg-white h-full w-[20%] border border-black/60 rounded-lg overflow-hidden flex flex-col justify-start items-center p-2 gap-5">
         <div className="h-1/2 w-full">
           <CreateMeetings navigate={navigate} />
@@ -24,7 +24,7 @@ const Home = () => {
           Previous Meetings
         </h1>
         <div className="h-[90%] w-full flex">
-          {isLoading ? <Loading /> : <PreviousMeetings />}
+          {isLoading ? <Loading /> : <PreviousMeetings navigate={navigate} />}
         </div>
       </div>
     </div>

@@ -10,10 +10,10 @@ const adjectives = [
   "Enchanted",
   "Forgotten",
   "Hidden",
-  "shimmering",
-  "whispering",
+  "Shimmering",
+  "Whispering",
   "Cosmic",
-  "Undiscovered",
+  "Guards",
   "Mysterious",
 ];
 const nouns = ["Room", "Space", "Lounge", "Hub", "Den", "Hangout"];

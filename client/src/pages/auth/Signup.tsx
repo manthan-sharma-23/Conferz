@@ -11,7 +11,7 @@ const Signup = () => {
 
   return (
     <div className="w-full h-[55vh] flex flex-col justify-center items-center font-sans ">
-      <p className="text-4xl text-white font-extrabold">Orbit</p>
+      <p className="text-4xl text-white font-extrabold">Conferz</p>
       <p className="text-xl text-white/70">
         Already a user{" "}
         <a href="/auth/signin" className="text-white underline">
