@@ -1,23 +1,20 @@
 import moment from "moment";
-import { NavigateFunction } from "react-router-dom";
 
 const MeetingCard = ({
   name,
   type,
   date,
   roomId,
-  navigate,
 }: {
   name: string;
   type: "p2p" | "sfu";
   date: Date;
   roomId: string;
-  navigate: NavigateFunction;
 }) => {
   const formattedTime = moment(date).format("lll");
 
   const onClick = () => {
-    navigate("/room/" + roomId);
+    window.location.assign("/room/" + roomId);
   };
   return (
     <div

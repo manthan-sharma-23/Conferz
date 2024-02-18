@@ -1,9 +1,8 @@
 import React, { useCallback, useState } from "react";
 import { ROOM_INPUT_TYPE } from "../../utils/types";
-import { NavigateFunction } from "react-router-dom";
 import { createRoom } from "../../features/functions/room/createRoom";
 
-const CreateMeetings = ({ navigate }: { navigate: NavigateFunction }) => {
+const CreateMeetings = () => {
   const [roomDetails, setRoomDetails] = useState<ROOM_INPUT_TYPE>({
     name: null,
     type: "p2p",
@@ -11,8 +10,8 @@ const CreateMeetings = ({ navigate }: { navigate: NavigateFunction }) => {
 
   const onCreate = useCallback(async () => {
     const room = await createRoom({ ...roomDetails });
-    navigate("/room/" + room.id);
-  }, [roomDetails, navigate]);
+    window.location.assign("/room/" + room.id);
+  }, [roomDetails]);
   return (
     <div className="h-full w-full flex flex-col gap-3">
       <p className="h-[20%] border-b-2 border-black/60 w-full justify-start items-center px-3 flex text-2xl font-[550]">

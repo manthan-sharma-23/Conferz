@@ -20,7 +20,7 @@ const RoomLayout = () => {
     return () => {
       setRoom(initialRoomState);
     };
-  }, [navigate]);
+  }, [navigate, setRoom]);
 
   if (room.isLoading) {
     return <Loading />;

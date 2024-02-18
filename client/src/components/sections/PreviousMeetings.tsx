@@ -1,9 +1,8 @@
 import { useRecoilValue } from "recoil";
 import { UserRoomsSelector } from "../../features/store/selectors/user.rooms.selector";
 import MeetingCard from "../ui/MeetingCard";
-import { NavigateFunction } from "react-router-dom";
 
-const PreviousMeetings = ({ navigate }: { navigate: NavigateFunction }) => {
+const PreviousMeetings = () => {
   const rooms = useRecoilValue(UserRoomsSelector);
 
   return (
@@ -18,7 +17,6 @@ const PreviousMeetings = ({ navigate }: { navigate: NavigateFunction }) => {
               if (room.userType === "host")
                 return (
                   <MeetingCard
-                    navigate={navigate}
                     key={index}
                     roomId={room.room.id}
                     name={room.room.name!}
@@ -39,7 +37,6 @@ const PreviousMeetings = ({ navigate }: { navigate: NavigateFunction }) => {
               if (room.userType === "member")
                 return (
                   <MeetingCard
-                    navigate={navigate}
                     key={index}
                     roomId={room.room.id}
                     name={room.room.name!}

@@ -1,18 +1,18 @@
-import React from "react";
 import { useRecoilValue } from "recoil";
-import { UsersInRoomSelector } from "../../../features/store/selectors/room.users.selector";
+import { RoomAtom } from "../../../features/store/atoms/room.atom";
 
 const UserPannel = () => {
-  const users = useRecoilValue(UsersInRoomSelector);
+  const room = useRecoilValue(RoomAtom);
 
   return (
     <div className="h-full w-full flex flex-col gap-3 justify-start items-center p-2 overflow-y-scroll overflow-x-hidden">
-      {users &&
-        users.map((user) => (
+      {room.users &&
+        room.users.map((user) => (
           <UserCard
-            name={user.user.name || ""}
-            type={user.userType}
-            email={user.user.email!}
+            key={user.id}
+            name={user.name || ""}
+            type={room.createdBy === user.id ? "host" : "member"}
+            email={user.email!}
           />
         ))}
     </div>
@@ -34,9 +34,9 @@ const UserCard = ({
         {name}
       </p>
       <div className="w-full h-[40%] flex justify-between items-center px-1">
-        <p className="font-bold flex justify-center items-center gap-2 text-black/55">
+        <div className="font-bold flex justify-center items-center gap-2 text-black/55">
           Role: <p className="text-black">{type}</p>
-        </p>
+        </div>
         <p>{email}</p>
       </div>
     </div>

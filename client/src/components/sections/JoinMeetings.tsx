@@ -1,21 +1,20 @@
 import { useCallback, useState } from "react";
-import { NavigateFunction } from "react-router-dom";
 import { joinRoom } from "../../features/functions/room/joinRoom";
 
-const JoinMeetings = ({ navigate }: { navigate: NavigateFunction }) => {
+const JoinMeetings = () => {
   const [roomCode, setRoomCode] = useState<string | null>(null);
 
   const onJoin = useCallback(async () => {
     if (roomCode) {
       const isjoin = await joinRoom({ code: roomCode });
       if (isjoin) {
-        navigate("/room/" + roomCode);
+        window.location.assign("/room/" + roomCode);
       } else {
         alert("Please Enter a valid code");
       }
     }
-  }, [roomCode, navigate]);
-  
+  }, [roomCode]);
+
   return (
     <div className="h-full w-full flex flex-col gap-3">
       <p className="h-[20%] border-b-2 border-black/60 w-full justify-start items-center px-3 flex text-2xl font-[550]">

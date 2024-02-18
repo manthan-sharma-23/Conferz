@@ -1,22 +1,20 @@
 import PreviousMeetings from "../components/sections/PreviousMeetings";
 import { useGetUserRooms } from "../features/hooks/useGetUserRooms.hook";
 import Loading from "../components/ui/Loading";
-import { useNavigate } from "react-router-dom";
 import CreateMeetings from "../components/sections/CreateMeetings";
 import JoinMeetings from "../components/sections/JoinMeetings";
 
 const Home = () => {
   const { isLoading } = useGetUserRooms();
-  const navigate = useNavigate();
 
   return (
     <div className="h-full w-full p-8 flex  justify-center items-center gap-4 bg-black ">
       <div className="bg-white h-full w-[20%] border border-black/60 rounded-lg overflow-hidden flex flex-col justify-start items-center p-2 gap-5">
         <div className="h-1/2 w-full">
-          <CreateMeetings navigate={navigate} />
+          <CreateMeetings />
         </div>
         <div className="h-1/2 w-full">
-          <JoinMeetings navigate={navigate} />
+          <JoinMeetings />
         </div>
       </div>
       <div className="h-full bg-white w-[80%] border border-black/60 rounded-lg p-1">
@@ -24,7 +22,7 @@ const Home = () => {
           Previous Meetings
         </h1>
         <div className="h-[90%] w-full flex">
-          {isLoading ? <Loading /> : <PreviousMeetings navigate={navigate} />}
+          {isLoading ? <Loading /> : <PreviousMeetings />}
         </div>
       </div>
     </div>

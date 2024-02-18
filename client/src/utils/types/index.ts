@@ -70,5 +70,5 @@ export interface RoomDetails {
   name: string | null;
   createdAt: Date | null;
   createdBy: string | null;
-  users: RoomUser[];
+  users: USER[];
 }
