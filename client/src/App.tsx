@@ -7,6 +7,7 @@ import Singout from "./pages/auth/Singout";
 import AuthLayout from "./components/layouts/AuthLayout";
 import RenderLayout from "./components/layouts/RenderLayout";
 import AppLayout from "./components/layouts/AppLayout";
+import Room from "./pages/Room";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
               <Route path="/" element={<AppLayout />}>
                 <Route index element={<Home />} />
               </Route>
+              <Route path="/room/:roomId" element={<Room />} />
             </Routes>
           </BrowserRouter>
         </RenderLayout>
