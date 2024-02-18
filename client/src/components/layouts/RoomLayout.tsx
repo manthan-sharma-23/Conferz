@@ -7,12 +7,14 @@ import {
 } from "../../features/store/atoms/room.atom";
 import Loading from "../ui/Loading";
 import { useGetRoom } from "../../features/hooks/useGetRoom";
+import { useWs } from "../../features/hooks/ws/useWs.hook";
 
 const RoomLayout = () => {
   const navigate = useNavigate();
   const [room, setRoom] = useRecoilState(RoomAtom);
   const { roomId } = useParams();
   useGetRoom({ roomId: roomId! });
+  useWs({ roomId: roomId! });
 
   useEffect(() => {
     return () => {

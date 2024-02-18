@@ -35,11 +35,14 @@ export type ROOM = {
 };
 
 export type MESSAGE = {
-  type: "JOIN" | "MESSAGE" | "INFO";
+  type: "JOIN" | "INFO" | "MESSAGE" | "BROADCAST" | "RENDER" | "LEAVE";
   payload: {
-    roomId?: string;
-    message?: TEXT;
+    room?: string;
+    user?: USER;
+    users?: USER[];
+    text?: string;
   };
+  sendAt: Date;
 };
 
 export type TEXT = {

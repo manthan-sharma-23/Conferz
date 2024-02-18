@@ -1,6 +1,6 @@
 import express from "express";
 import http from "http";
-import SocketService from "./socket/socket";
+import SocketService from "./services/socket/socket";
 import AppRouter from "./api";
 
 

@@ -26,11 +26,7 @@ const Room = () => {
       </p>
       {pannel && (
         <div
-          className={`h-full w-${
-            pannel ? "[25vw]" : "0"
-          } border-2 relative shadow-lg z-3 
-           flex
-        flex-col justify-start items-center transition-all`}
+          className={`h-full w-[25vw] border-2 relative shadow-lg z-3 flex flex-col justify-start items-center transition-all`}
         >
           <div className="h-[8%] border-2 w-full flex justify-start items-center font-medium text-2xl px-3 gap-4">
             <p>{room.name}</p>
@@ -52,7 +48,7 @@ const Room = () => {
                   userPannel ? "[70%]" : "0"
                 } absolute z-40 w-full bg-white shadow-lg rounded-b-xl`}
               >
-                <UserPannel/>
+                <UserPannel />
               </div>
             )}
             <div className="relative h-full w-full">

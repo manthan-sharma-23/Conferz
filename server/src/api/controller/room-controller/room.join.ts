@@ -19,6 +19,21 @@ export const joinRoom = async (req: ProtectedRequest, res: Response) => {
         .status(INTERNAL_SERVER_ERROR.code)
         .json(INTERNAL_SERVER_ERROR.action);
     }
+    const alreadyInRoom = await db.roomUser.findFirst({
+      where: {
+        AND: [
+          {
+            userId: id,
+          },
+          {
+            roomId: roomId,
+          },
+        ],
+      },
+    });
+
+    if (alreadyInRoom)
+      return res.status(200).json({ roomId, message: "Already in the room" });
 
     const room = await db.room.findUnique({
       where: {
@@ -36,7 +51,7 @@ export const joinRoom = async (req: ProtectedRequest, res: Response) => {
       data: {
         roomId,
         userId: id,
-        userType:"member"
+        userType: "member",
       },
     });
 
