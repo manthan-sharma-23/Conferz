@@ -1,14 +1,12 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
-import JoinRoom from "./pages/JoinRoom";
-import CreateRoom from "./pages/CreateRoom";
-import Room from "./pages/Room";
 import { RecoilRoot } from "recoil";
 import Signin from "./pages/auth/Signin";
 import Signup from "./pages/auth/Signup";
 import Singout from "./pages/auth/Singout";
 import AuthLayout from "./components/layouts/AuthLayout";
 import RenderLayout from "./components/layouts/RenderLayout";
+import AppLayout from "./components/layouts/AppLayout";
 
 function App() {
   return (
@@ -22,10 +20,9 @@ function App() {
                 <Route path="/auth/signup" element={<Signup />} />
                 <Route path="/auth/signout" element={<Singout />} />
               </Route>
-              <Route index element={<Home />} />
-              <Route path="/join" element={<JoinRoom />} />
-              <Route path="/create" element={<CreateRoom />} />
-              <Route path="/room/:room" element={<Room />} />
+              <Route path="/" element={<AppLayout />}>
+                <Route index element={<Home />} />
+              </Route>
             </Routes>
           </BrowserRouter>
         </RenderLayout>

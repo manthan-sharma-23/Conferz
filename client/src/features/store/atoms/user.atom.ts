@@ -2,7 +2,7 @@ import { atom } from "recoil";
 import { USER } from "../../../utils/types";
 
 const InitialState: { user: USER; loading: boolean } = {
-  user: { name: null, email: null },
+  user: { name: null, email: null, id: null },
   loading: false,
 };
 

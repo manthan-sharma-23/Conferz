@@ -8,16 +8,29 @@ datasource db {
 }
 
 model User {
-  id       String  @id @unique @default(cuid())
+  id       String     @id @unique @default(cuid())
   name     String?
-  email    String  @unique
+  email    String     @unique
   password String
-  rooms    Room[]
+  rooms    RoomUser[]
 }
 
 model Room {
   id        String   @id @unique @default(cuid())
   type      String?  @default("p2p")
-  users     User[]
   createdAt DateTime @default(now())
+  users RoomUser[]
+}
+
+model RoomUser {
+  id        Int      @id @unique @default(autoincrement())
+  userId    String
+  roomId    String
+  userType  String?  @default("member")
+  user      User     @relation(fields: [userId], references: [id])
+  room      Room     @relation(fields: [roomId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, roomId])
 }
