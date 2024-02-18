@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "dev": "yarn build && npx tsc-watch --onSuccess \"node dist/index.js\"",
-    "build": "npx tsc -b"
+    "build": "npx tsc -b",
+    "db:migrate": "npx prisma migrate dev --name init"
   },
   "dependencies": {
     "@prisma/client": "^5.9.1",
@@ -16,6 +17,7 @@
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.2",
     "morgan": "^1.10.0",
+    "random-words": "^2.0.1",
     "ws": "^8.16.0",
     "zod": "^3.22.4"
   },

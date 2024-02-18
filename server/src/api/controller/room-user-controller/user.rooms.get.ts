@@ -22,12 +22,13 @@ export const getRooms = async (req: ProtectedRequest, res: Response) => {
       where: {
         userId: id,
       },
+      select: {
+        userType: true,
+        room: true,
+      },
     });
 
-    // if (!roomUser.id) return res.sendStatus(RESOURCE_NOT_MODIFIED.code);
-    return res
-      .status(RESOURCE_FOUND_SUCCESSFULLY.code)
-      .json(rooms);
+    return res.status(RESOURCE_FOUND_SUCCESSFULLY.code).json(rooms);
   } catch (error) {
     return res
       .status(INTERNAL_SERVER_ERROR.code)

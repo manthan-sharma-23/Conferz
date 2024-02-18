@@ -4,6 +4,7 @@ import {
   RESOURCE_CREATED_SUCCESSFULLY,
   RESOURCE_NOT_MODIFIED,
 } from "../../../utils/config/log";
+import { generateCoolRoomName } from "../../../utils/helper/room.name.generator";
 import { ProtectedRequest } from "../../../utils/types/extend";
 import { Response } from "express";
 
@@ -11,6 +12,7 @@ export const createRoom = async (req: ProtectedRequest, res: Response) => {
   try {
     const id = req.user;
     const { name, type } = req.body;
+    let roomName = name;
 
     if (!id) {
       return res
@@ -18,9 +20,14 @@ export const createRoom = async (req: ProtectedRequest, res: Response) => {
         .json(INTERNAL_SERVER_ERROR.action);
     }
 
+    if (roomName === null || roomName === undefined) {
+      roomName = generateCoolRoomName();
+      console.log(generateCoolRoomName());
+    }
+
     const room = await db.room.create({
       data: {
-        name,
+        name: roomName,
         type,
       },
     });
@@ -35,10 +42,8 @@ export const createRoom = async (req: ProtectedRequest, res: Response) => {
       },
     });
     if (!roomUser.id) return res.sendStatus(RESOURCE_NOT_MODIFIED.code);
-    return res
-      .status(RESOURCE_CREATED_SUCCESSFULLY.code)
-      .json(RESOURCE_CREATED_SUCCESSFULLY.action);
-  } catch (error) {
+    return res.status(RESOURCE_CREATED_SUCCESSFULLY.code).json(room);
+  } catch (error) {RESOURCE_CREATED_SUCCESSFULLY.action
     return res
       .status(INTERNAL_SERVER_ERROR.code)
       .json(INTERNAL_SERVER_ERROR.action);

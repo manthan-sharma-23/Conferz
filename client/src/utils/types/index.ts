@@ -1,8 +1,8 @@
 //user controllers
 export type INPUT_LOGIN_FORM = {
-  name?: string;
-  email?: string;
-  password?: string;
+  name?: string | null;
+  email: string;
+  password: string;
 };
 
 export type OUTPUT_LOGIN_FORM = {
@@ -11,9 +11,9 @@ export type OUTPUT_LOGIN_FORM = {
 };
 
 export type USER = {
-  name?: string | null;
+  name: string | null;
   email: string | null;
-  id?: string | null;
+  id: string | null;
 };
 
 export const ROOM_TYPE = {
@@ -30,7 +30,7 @@ export const MESSAGE_TYPE = {
 export type ROOM = {
   id: string;
   name?: string;
-  users?: USER[];
+  type?: "p2p" | "sfu";
   createdAt: Date;
 };
 
@@ -47,3 +47,13 @@ export type TEXT = {
   userId: string;
   text: string;
 };
+
+export type ROOM_INPUT_TYPE = {
+  type: "sfu" | "p2p";
+  name: string | null;
+};
+
+export interface USER_ROOM_TYPE {
+  userType: "host" | "member";
+  room: ROOM;
+}

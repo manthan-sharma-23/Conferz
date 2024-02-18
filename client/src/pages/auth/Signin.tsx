@@ -3,7 +3,9 @@ import { type INPUT_LOGIN_FORM } from "../../utils/types";
 import { loginForm } from "../../features/functions/auth/login";
 
 const Signin = () => {
-  const [formDetails, setFormDetails] = useState<INPUT_LOGIN_FORM>({});
+  const [formDetails, setFormDetails] = useState<Partial<INPUT_LOGIN_FORM>>({
+    name: null,
+  });
   return (
     <div className="w-full h-[55vh] flex flex-col justify-center items-center font-sans ">
       <p className="text-4xl text-white font-extrabold">Conferz</p>
@@ -32,7 +34,8 @@ const Signin = () => {
         />
         <button
           onClick={() => {
-            loginForm(formDetails);
+            if (formDetails.email && formDetails.password )
+              loginForm(formDetails);
           }}
           className=" font-sans border-white border-2 w-[8vw] h-12 flex justify-center items-center bg-black text-white font-extrabold rounded-xl"
         >

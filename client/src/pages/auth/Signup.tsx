@@ -3,7 +3,11 @@ import { INPUT_LOGIN_FORM } from "../../utils/types";
 import { registerForm } from "../../features/functions/auth/register";
 
 const Signup = () => {
-  const [formDetails, setFormDetails] = useState<INPUT_LOGIN_FORM>({});
+  const [formDetails, setFormDetails] = useState<INPUT_LOGIN_FORM>({
+    name: null,
+    email: "",
+    password: "",
+  });
 
   return (
     <div className="w-full h-[55vh] flex flex-col justify-center items-center font-sans ">
@@ -18,7 +22,7 @@ const Signup = () => {
       <div className="h-[70%] w-full  flex flex-col justify-center gap-5 items-center">
         <input
           className="w-[18vw] h-10 pl-2 text-white bg-transparent border-white focus:outline-none border-b-2 "
-          placeholder="Enter your name"
+          placeholder="Enter your name (optional)"
           onChange={(e) =>
             setFormDetails((prev) => ({ ...prev, name: e.target.value }))
           }
@@ -32,7 +36,7 @@ const Signup = () => {
         />
         <input
           type="password"
-          placeholder="Enter your password"
+          placeholder="Enter your password (minimum 5 characters)"
           onChange={(e) =>
             setFormDetails((prev) => ({ ...prev, password: e.target.value }))
           }
@@ -40,7 +44,8 @@ const Signup = () => {
         />
         <button
           onClick={() => {
-            registerForm(formDetails);
+            if (formDetails.email && formDetails.password)
+              registerForm(formDetails);
           }}
           className="font-sans border-white border-2 w-[8vw] h-12 flex justify-center items-center bg-black text-white font-extrabold rounded-xl"
         >

@@ -21,6 +21,7 @@ model Room {
   type      String?    @default("p2p")
   createdAt DateTime   @default(now())
   users     RoomUser[]
+  status    String?    @default("active")
 }
 
 model RoomUser {

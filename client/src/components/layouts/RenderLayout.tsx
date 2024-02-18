@@ -1,4 +1,4 @@
-import { useGetUser } from "../../features/hooks/getUser";
+import { useGetUser } from "../../features/hooks/useGetUser.hook";
 
 const RenderLayout = ({ children }: { children?: React.ReactNode }) => {
   useGetUser();
