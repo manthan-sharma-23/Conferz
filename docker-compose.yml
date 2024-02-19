@@ -1,0 +1,38 @@
+version: '3.8'
+services:
+  server:
+    build:
+      context: server
+      dockerfile: Dockerfile
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@database:5432/conferz
+      - SECRET_KEY=your_secret_key
+    ports:
+      - '3200:3200'
+    depends_on:
+      - database
+    volumes:
+      - ./server:/usr/src/app/server
+  client:
+    build: ./client
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./client:/usr/src/app/client
+    depends_on:
+      - server
+    stdin_open: true
+    tty: true    
+  database:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: conferz
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

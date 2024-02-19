@@ -13,10 +13,7 @@ import { USER_LOGGED_IN_SUCCESSFULLY } from "../../../utils/config/log";
 
 export default async function LoginUser(req: Request, res: Response) {
   try {
-    console.log("no cors");
     const { email, password } = req.body;
-
-    console.log(req.body);
 
     if (!email || !password)
       return res.status(INVALID_INPUTS.code).json(INVALID_INPUTS.action);

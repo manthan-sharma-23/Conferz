@@ -9,6 +9,7 @@ import SFU from "../components/sections/Video/SFU";
 import { RoomDetailsSelector } from "../features/store/selectors/room.details.selector";
 
 const Room = () => {
+  console.log("hey");
   const [pannel, setPannel] = useState<boolean>(false);
   const [userPannel, setUserPannel] = useState<boolean>(false);
   const room = useRecoilValue(RoomDetailsSelector);
