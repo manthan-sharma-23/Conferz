@@ -14,15 +14,16 @@ services:
     volumes:
       - ./server:/usr/src/app/server
   client:
-    build: ./client
+    build: client
     ports:
       - '3000:3000'
+    container_name: conferz-client
     volumes:
       - ./client:/usr/src/app/client
     depends_on:
       - server
     stdin_open: true
-    tty: true    
+    tty: true
   database:
     image: postgres:latest
     environment:
