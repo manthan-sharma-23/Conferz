@@ -16,7 +16,6 @@ export const useWs = ({ roomId }: { roomId: string }) => {
   const setRoomUsers = useSetRecoilState(RoomAtom);
   const user = useRecoilValue(UserAtom);
 
-
   const acceptIncommingCall = useCallback(
     async ({ call, ws }: { call: CALL; ws: WebSocket }) => {
       const answer = await p2p.getAnswer(call.offer);
@@ -89,10 +88,6 @@ export const useWs = ({ roomId }: { roomId: string }) => {
             //   }
             // }
 
-            if (message.type === "RENDER" && message.payload.users) {
-              sendOffer({ roomId, user: user.user, ws: wsInstance });
-            }
-
             if (message.type === "P2P") {
               if (message.payload.call?.type === "incomming") {
                 acceptIncommingCall({
@@ -101,12 +96,12 @@ export const useWs = ({ roomId }: { roomId: string }) => {
                 });
               }
               if (message.payload.call?.type === "answer") {
+                console.log(message.payload.call);
                 handleAcceptedCall({
                   call: message.payload.call,
                 });
               }
             }
-
             setRoomUsers((prev) => {
               if (message.type === "RENDER" && message.payload.users) {
                 return { ...prev, users: message.payload.users };
@@ -114,6 +109,10 @@ export const useWs = ({ roomId }: { roomId: string }) => {
                 return prev;
               }
             });
+            if (message.type === "RENDER" && message.payload.users) {
+              sendOffer({ roomId, user: user.user, ws: wsInstance });
+            }
+
             prev_message = msg.data;
           }
         });
