@@ -38,14 +38,23 @@ export type ROOM = {
 };
 
 export type MESSAGE = {
-  type: "JOIN" | "INFO" | "MESSAGE" | "BROADCAST" | "RENDER" | "LEAVE";
+  type: "JOIN" | "INFO" | "MESSAGE" | "BROADCAST" | "RENDER" | "LEAVE" | "P2P";
   payload: {
     room?: string;
     user?: USER;
     users?: USER[];
     text?: string;
+    call?: CALL;
   };
   sendAt: Date;
+};
+
+export type CALL = {
+  from: USER;
+  roomType: "p2p" | "sfu";
+  room: string;
+  type: "incomming" | "outgoing" | "answer";
+  offer: RTCSessionDescriptionInit;
 };
 
 export type TEXT = {

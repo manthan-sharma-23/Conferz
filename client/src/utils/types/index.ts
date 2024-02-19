@@ -35,20 +35,30 @@ export type ROOM = {
 };
 
 export type MESSAGE = {
-  type: "JOIN" | "INFO" | "MESSAGE" | "BROADCAST" | "RENDER" | "LEAVE";
+  type: "JOIN" | "INFO" | "MESSAGE" | "BROADCAST" | "RENDER" | "LEAVE" | "P2P";
   payload: {
     room?: string;
     user?: USER;
     users?: USER[];
     text?: string;
+    call?: CALL;
   };
   sendAt: Date;
 };
 
+export type CALL = {
+  from: USER;
+  roomType: "p2p" | "sfu";
+  room: string;
+  type: "incomming" | "outgoing" | "answer";
+  offer: RTCSessionDescriptionInit;
+};
+
 export type TEXT = {
   sendAt: Date;
-  userId: string;
+  userId?: string;
   text: string;
+  type: "BROADCAST" | "MESSAGE";
 };
 
 export type ROOM_INPUT_TYPE = {
@@ -71,4 +81,5 @@ export interface RoomDetails {
   createdAt: Date | null;
   createdBy: string | null;
   users: USER[];
+  type: "p2p" | "sfu";
 }

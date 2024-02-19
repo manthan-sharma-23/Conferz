@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Outlet, useNavigate, useParams } from "react-router-dom";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import {
   RoomAtom,
   initialRoomState,
@@ -8,10 +8,15 @@ import {
 import Loading from "../ui/Loading";
 import { useGetRoom } from "../../features/hooks/useGetRoom";
 import { useWs } from "../../features/hooks/ws/useWs.hook";
+import {
+  ChatAtom,
+  initialChatState,
+} from "../../features/store/atoms/ws/chat.atom";
 
 const RoomLayout = () => {
   const navigate = useNavigate();
   const [room, setRoom] = useRecoilState(RoomAtom);
+  const setChat = useSetRecoilState(ChatAtom);
   const { roomId } = useParams();
   useGetRoom({ roomId: roomId! });
   useWs({ roomId: roomId! });
@@ -19,8 +24,9 @@ const RoomLayout = () => {
   useEffect(() => {
     return () => {
       setRoom(initialRoomState);
+      setChat(initialChatState);
     };
-  }, [navigate, setRoom]);
+  }, [navigate, setRoom, setChat]);
 
   if (room.isLoading) {
     return <Loading />;

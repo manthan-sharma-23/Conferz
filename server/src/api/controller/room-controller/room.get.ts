@@ -23,6 +23,7 @@ export const getRoomById = async (req: ProtectedRequest, res: Response) => {
         name: true,
         createdAt: true,
         createdBy: true,
+        type: true,
       },
     });
 
